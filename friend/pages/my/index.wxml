@@ -4,7 +4,7 @@
       <view class="user-info tapbar">
         <block wx:if="{{userInfo.avatarUrl != ''}}">
           <view class='user-avatar'>
-            <image bindtap="uploadTap" src="{{userInfo.avatarUrl}}"></image>
+            <image src="{{userInfo.avatarUrl}}"></image>
           </view>
         </block>
         <view class='edit-user'>

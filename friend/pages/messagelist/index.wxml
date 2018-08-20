@@ -1,4 +1,9 @@
 <!--index.wxml-->
 <view class="page">
-  <list-cell bind:onCellTap="bindCellTapHandler" bind:onOperateTap="bindOperateTapHandler" dataList="{{messageList}}"></list-cell>
+  <block wx:if="{{messageList.length>0}}">
+    <list-cell bind:onCellTap="bindCellTapHandler" bind:onOperateTap="bindOperateTapHandler" dataList="{{messageList}}"></list-cell>
+  </block>
+  <block wx:else>
+    <view class='no-message'>暂无消息</view>
+  </block>
 </view>

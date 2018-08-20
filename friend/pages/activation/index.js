@@ -193,11 +193,34 @@ Page({
         method: 'post',
         data: {
           mobile: phoneNum,
-          event: "changemobile",
+          event: "activation",
         },
         needLoadingIndicator: true,
         success: (rel) => {
           console.log(rel)
+          if(rel.data.code){
+            var si = setInterval(function () {
+              if (count > 0) {
+                count--;
+
+                wx.setStorageSync("timecount", count);
+
+                that.setData({
+                  getSmsCodeBtnTxt: count + ' s',
+                  getSmsCodeBtnColor: "#999",
+                  smsCodeDisabled: true
+                });
+              } else {
+                that.setData({
+                  getSmsCodeBtnTxt: "获取验证码",
+                  getSmsCodeBtnColor: "#ff9900",
+                  smsCodeDisabled: false
+                });
+                count = 60;
+                clearInterval(si);
+              }
+            }, 1000);
+          }
           wx.showModal({
             title: '提示',
             showCancel: false,
@@ -209,28 +232,6 @@ Page({
       }
       app.jamasTool.request(params);
 
-
-      var si = setInterval(function () {
-        if (count > 0) {
-          count--;
-         
-          wx.setStorageSync("timecount", count);
-
-          that.setData({
-            getSmsCodeBtnTxt: count + ' s',
-            getSmsCodeBtnColor: "#999",
-            smsCodeDisabled: true
-          });
-        } else {
-          that.setData({
-            getSmsCodeBtnTxt: "获取验证码",
-            getSmsCodeBtnColor: "#ff9900",
-            smsCodeDisabled: false
-          });
-          count = 60;
-          clearInterval(si);
-        }
-      }, 1000);
     }
 
   },
@@ -262,9 +263,8 @@ Page({
     })
   },
   redirectToMyself: function () {
-    wx.redirectTo({
-      url: '../my/index'
+    wx.switchTab({
+      url: '../my/index',
     })
   }
-
 })

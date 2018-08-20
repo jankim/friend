@@ -248,7 +248,7 @@ Page({
     let times = e.timeStamp - this.data.startTimestamp, //时间间隔；
       distance = e.changedTouches[0].clientX - this.data.startClinetX; //距离间隔；
     //判断
-    if (times < 500 && Math.abs(distance) > 10) {
+    if (times < 800 && Math.abs(distance) > 5) {
       let curIndex = this.data.curIndex;
 
       let x0 = this.data.itemWidth, x1 = this.data.translateDistance, x = 0;
@@ -485,9 +485,7 @@ Page({
             delay: 0
           })
           console.log(this.data.swiperList)
-          setInterval(this.autoSwap,3000);
-
-      
+          setInterval(this.autoSwap,5000);
 
         }else{
           wx.showModal({

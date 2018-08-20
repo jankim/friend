@@ -1,7 +1,7 @@
 <view class="content">
-    <view class = "logo">
-        <image mode="aspectFit" src="/images/u2.png"></image>
-    </view>
+    <!-- <view class = "logo">
+        <image mode="aspectFit" src="/images/index.jpg"></image>
+    </view> -->
        
     <view class='nav-btn-area font-16px'>
       <view class="btn blue">

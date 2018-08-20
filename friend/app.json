@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/ListView/ListView",
     "pages/index/index",
+    "pages/ListView/ListView",
+   
     
     "pages/set/index",
     "pages/suggest/index",
     "pages/changepassword/index",
     "pages/privacyset/index",
     "pages/about/index", 
-
     "pages/loginbymobile/index",
     "pages/my/index",
     "pages/matchmakerList/index",
@@ -19,7 +19,6 @@
     "pages/article/index",
     "pages/activityList/index",
     "pages/activity/index",  
-
     "pages/register/index",
     "pages/login/index",
     "pages/activation/index",
@@ -42,7 +41,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "red",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "海论交友",
     "navigationBarTextStyle": "black"
   },

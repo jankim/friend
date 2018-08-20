@@ -104,8 +104,8 @@ Page({
           wx.hideToast()
         })
         .on('beforeDraw', (ctx) => {
-          console.log(`before canvas draw,i can do something`)
-          console.log(`current canvas context:`, ctx)
+          // console.log(`before canvas draw,i can do something`)
+          // console.log(`current canvas context:`, ctx)
           //  那就尝试在图片上加个水印吧
           // ctx.drawImage(path, 50, 50, 50, 30)
           // ctx.setFontSize(14)
