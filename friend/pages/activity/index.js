@@ -6,6 +6,7 @@ Page({
   data: {
   },
   onLoad: function (option) {
+
     this.setData({
       token: app.jamasTool.getUserToken(),
       id: option.id
@@ -40,12 +41,12 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
           wx.showModal({
-            content: rel.data.msg,
+            content: '系统异常，请稍候再试',
             showCancel: false,
           })
         }
@@ -75,12 +76,6 @@ Page({
           this.setData({
             isJoin: rel.data.data.isJoin
           })
-          if (rel.data.data.errcode){
-            wx:wx.showToast({
-              icon: 'none',
-              title: 'errcode:'+rel.data.data.errcode,
-            })
-          }
 
         } else if (rel.data.code == "401") {
           wx.showModal({
@@ -88,7 +83,7 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -103,30 +98,25 @@ Page({
     }
     app.jamasTool.request(params); 
   },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
-  },
   onShareAppMessage: function (ops) {
     if (ops.from === 'button') {
-      console.log(ops.target)
+  
     }
     return {
       title: app.globalData.shareProfile,
       path: util.getCurrentPageUrlWithArgs(),
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: "none",
-          title: '分享成功',
-        })
+        // wx.showToast({
+        //   icon: "none",
+        //   title: '分享成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: "none",
-          title: '分享失败',
-        })
+        // wx.showToast({
+        //   icon: "none",
+        //   title: '分享失败',
+        // })
       }
     }
   },

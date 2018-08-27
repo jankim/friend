@@ -1,10 +1,10 @@
 <!--pages/my/index.wxml-->
-<view class="container">
+<view class="container font-11pt">
 
   <view class='tapbar'>
       <view class='cell border-bottom'>
         <view class='left'>
-        <text>隐私设置</text>        
+        <text>公开个人资料</text>        
         </view> 
         <view class='go'>
           <view>

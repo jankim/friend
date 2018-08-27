@@ -1,4 +1,4 @@
-<view class="content">
+<view class="content font-10pt">
     <view class = "logo">
         <image mode="aspectFit" src="/images/Hello.png"></image>
     </view>
@@ -10,10 +10,9 @@
         <view class="btn-area">
             <button  disabled="{{registDisabled}}" formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
             <view class="txt-area">
-                  <navigator redirect url="../loginbymobile/index"><text class="register">忘记密码</text></navigator>
+               <navigator redirect url="../index/index"><text class="register">回到首页</text></navigator>
+               <navigator redirect url="../loginbymobile/index"><text class="register">忘记密码</text></navigator>
             </view>
         </view>
     </form>
-
-
 </view>

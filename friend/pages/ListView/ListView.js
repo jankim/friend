@@ -1,6 +1,5 @@
 //index.js
 //获取应用实例
-var register = require('../../utils/refreshLoadRegister.js');
 import { $wuxFilterBar } from '../../utils/wux-components/wux'
 var app = getApp()
 Page({
@@ -195,11 +194,10 @@ Page({
         // groups: ['001', '002', '003'],
       },
     ],
-    loadingHidden: false, // loading
     swiperCurrent: 0,
     goods: [],
     goodsList: [],
-    loadingMoreHidden: true,
+    loadingMoreHidden: 0,
     currentSize: 0,
     token: '',
     page: 0,
@@ -225,6 +223,7 @@ Page({
     animationToLarge: {}, //从小变大的动画；
     animationToSmall: {},
     canCheck: false,
+    dir: true,
   },
   //触摸开始的事件
   swiperTouchstart: function (e) {
@@ -240,7 +239,6 @@ Page({
   swiperTouchmove: function (e) {
     // console.log('touchmove',e);
   },
-
   //触摸结束事件
   swiperTouchend: function (e) {
     // console.log("触摸结束",e);
@@ -282,24 +280,42 @@ Page({
     }
   },
   autoSwap: function(){
-
-      let curIndex = this.data.curIndex;
-      let x0 = this.data.itemWidth, x1 = this.data.translateDistance, x = 0;
-
+    let curIndex = this.data.curIndex;
+    let x0 = this.data.itemWidth, x1 = this.data.translateDistance, x = 0;
+    if (curIndex==0) {
+      this.setData({
+        dir: true
+      })
+    } else if (curIndex >= this.data.swiperList.length-1){
+      this.setData({
+        dir: false
+      })
+    }
+    if (this.data.dir) {
       curIndex = curIndex + 1
       if (curIndex >= this.data.swiperList.length) {
-        curIndex = 0;
-        x = this.data.allWidth - this.data.swiperList.length * x0;
-      }else{
-        x = x1 - x0;
+        curIndex = this.data.swiperList.length - 1;
+        x0 = 0;
       }
+      x = x1 - x0;
+    } else {
+      curIndex = curIndex - 1
+      if (curIndex < 0) {
+        curIndex = 0;
+        x0 = 0;
+      }
+      x = x1 + x0;
+    }
+    this.setData({
+      curIndex: curIndex
+    })
 
-      this.animationToLarge(curIndex, x);
-      this.animationToSmall(curIndex, x);
-      this.setData({
-        curIndex: curIndex,
-        translateDistance: x
-      })
+    this.animationToLarge(curIndex, x);
+    this.animationToSmall(curIndex, x);
+    this.setData({
+      curIndex: curIndex,
+      translateDistance: x
+    })
   },
   // 动画
   animationToLarge: function (curIndex, x) {
@@ -317,7 +333,6 @@ Page({
     })
   },
   tabClick: function (e) {
-
   },
   toDetailsTap: function (e) {
 
@@ -328,6 +343,7 @@ Page({
     }else{
       wx.showModal({
         title: '',
+        showCancel:false,
         content: '为了公平原则，你需要填写基本个人资料才能查看用户资料,现在就去填写？',
         success: (rel) => {
           if(rel.confirm){
@@ -336,6 +352,37 @@ Page({
         }
       })
     }
+  },
+  onShow: function(){
+    let params2 = {
+      url: 'Sundry/getAds',
+      header: {
+        'Content-Type': 'application/json',
+        'token': this.data.token
+      },
+      method: 'post',
+      data: {
+        position: 1
+      },
+      needLoadingIndicator: true,
+      success: (rel) => {
+        console.log(rel)
+        if (rel.data.code == "1") {
+
+          this.setData({
+            goodmidlist: rel.data.data.groupads,
+            canCheck: rel.data.data.canCheck
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: rel.data.msg
+          })
+        }
+      }
+    }
+    app.jamasTool.request(params2); 
   },
   doLoadData(params) {
     let params3 = {
@@ -353,12 +400,13 @@ Page({
             this.data.query.page+=1;
             this.setData({
               query: this.data.query,
+              loadingMoreHidden: 0,
               goods: [...rel.data.data.list, ...this.data.goods]
             })
           }
           else{
             this.setData({
-              loadingMoreHidden: false
+              loadingMoreHidden: 2
             })
           }
         } else {
@@ -370,20 +418,25 @@ Page({
         }
       },
       complete: ()=>{
-        register.loadFinish(this, true);
+        wx.stopPullDownRefresh()
       }
     }
     app.jamasTool.request(params3);
-
-    
-
   },
-  //模拟刷新数据
-  refresh: function () {
-
+  onPullDownRefresh: function () {
+    this.setData({
+      query: {
+        page: 0
+      },
+      goods: [
+      ],
+    })
+    this.doLoadData(this.data.query);
   },
-  //模拟加载更多数据
-  loadMore: function () {
+  onReachBottom:function(){
+    this.setData({
+      loadingMoreHidden: 1,
+    })
     this.doLoadData(this.data.query);
   },
   onLoad: function () {
@@ -406,8 +459,6 @@ Page({
         items: searchItem
       })
     }
-
-    register.register(this);
 
     this.$wuxFilterBar = $wuxFilterBar.init({
       items: this.data.items,
@@ -484,7 +535,6 @@ Page({
             timingFunction: "ease-out",
             delay: 0
           })
-          console.log(this.data.swiperList)
           setInterval(this.autoSwap,5000);
 
         }else{
@@ -499,35 +549,7 @@ Page({
     app.jamasTool.request(params);
 
 
-    let params2 = {
-      url: 'Sundry/getAds',
-      header: {
-        'Content-Type': 'application/json',
-        'token': this.data.token
-      },
-      method: 'post',
-      data: {
-        position: 1
-      },
-      needLoadingIndicator: true,
-      success: (rel) => {
-        console.log(rel)
-        if (rel.data.code == "1") {
 
-          this.setData({
-            goodmidlist: rel.data.data.groupads,
-            canCheck: rel.data.data.canCheck
-          });
-        } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
-        }
-      }
-    }
-    app.jamasTool.request(params2); 
 
     this.doLoadData(this.data.query);
   },
@@ -543,44 +565,27 @@ Page({
     this.$wuxFilterBar.onCloseSelect()
 
   },
-  onShareAppMessage: function () {
-    return {
-      title: wx.getStorageSync('mallName') + '——' + app.globalData.shareProfile,
-      path: '/pages/index/index',
-      success: function (res) {
-        // 转发成功
-      },
-      fail: function (res) {
-        // 转发失败
-      }
-    }
-  },
   onShareAppMessage: function (ops) {
     if (ops.from === 'button') {
       console.log(ops.target)
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
   redirectToMy: function () {
     wx.switchTab({

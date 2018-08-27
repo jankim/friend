@@ -95,15 +95,11 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: rel.data.msg,
-            showCancel: false,
-            content: rel.data.data.err
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       },
       complete: () => {
@@ -181,7 +177,7 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {

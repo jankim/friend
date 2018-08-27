@@ -67,17 +67,14 @@ Page({
       success: (rel) => {
         console.log(rel)
         if (rel.data.code == "1") {
-          wx.showToast({
-            icon: 'none',
-            title: '修改成功',
-          })
+          app.jamasTool.showToast('修改成功');
         } else if (rel.data.code == "401") {
           wx.showModal({
             title: '提示',
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -90,10 +87,5 @@ Page({
       }
     }
     app.jamasTool.request(params3);
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

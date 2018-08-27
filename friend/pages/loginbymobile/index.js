@@ -190,8 +190,6 @@ Page({
             content: rel.data.msg
           })
         }
-
-
       }
       app.jamasTool.request(params);
 

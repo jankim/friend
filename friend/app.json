@@ -1,43 +1,41 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/ListView/ListView",
-   
     
+    "pages/index/index",
+    "pages/index2/index",
+    "pages/ListView/ListView",
+    "pages/about/index",
+    "pages/activation/index",
     "pages/set/index",
     "pages/suggest/index",
     "pages/changepassword/index",
     "pages/privacyset/index",
-    "pages/about/index", 
     "pages/loginbymobile/index",
-    "pages/my/index",
+    "pages/basicinfo/index",
     "pages/matchmakerList/index",
     "pages/matchmaker/index",
     "pages/datingsiteList/index",
     "pages/datingsite/index",
+    "pages/activityList/index",
+    "pages/activity/index",
+    "pages/login/index",
+    "pages/auth/index",
     "pages/articleList/index",
     "pages/article/index",
-    "pages/activityList/index",
-    "pages/activity/index",  
-    "pages/register/index",
-    "pages/login/index",
-    "pages/activation/index",
-
-    
-    "pages/auth/index",
     "pages/message/index",
     "pages/messagelist/index",
-    
-    "pages/user/index",  
+    "pages/user/index",
     "pages/chat/index",
-    "pages/followme/index",
     "pages/myfans/index",
+    "pages/followme/index",
     "pages/myvisitor/index",
-    "pages/basicinfo/index",
     "pages/myalbum/index",
     "pages/fillinfo/index",
+    "pages/avatarUpload/getavater/upload",
     "pages/avatarUpload/upload/upload",
-    "pages/avatarUpload/getavater/upload" 
+    "pages/my/index",
+    "pages/register/index"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

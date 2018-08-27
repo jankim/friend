@@ -16,8 +16,18 @@ Page({
       },
       needLoadingIndicator: true,
       success: (rel) => {
-        var article = rel.data.data.about
-        WxParse.wxParse('article', 'html', article, this, 5);
+
+        if (rel.data.code == "1") {
+          var article = rel.data.data.about
+          WxParse.wxParse('article', 'html', article, this, 5);
+        } else {
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '系统异常，请稍候再试'
+          })
+        }
+
       }
     }
     app.jamasTool.request(params);
@@ -29,19 +39,19 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
   },

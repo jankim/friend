@@ -1,4 +1,4 @@
-<view class='page'>
+<view class='page font-11pt'>
 
   <block wx:if="{{doingactivity.length>0}}">
     <view wx:for="{{doingactivity}}" class='on-activity' wx:key="{{item.id}}">
@@ -8,7 +8,7 @@
             <image src='{{item.image}}'></image>
           </view>
           <view class='detail'>
-            <text class='capsule'>进行中</text>
+            <text class='capsule font-7pt'>进行中</text>
             <text class='des'>{{item.name}}</text>
           </view>
           <view class='space'></view>
@@ -32,12 +32,13 @@
         </view>
       </navigator>
     </view>
+
   </block>
 
 
   <block wx:if="{{hadactivity.length>0}}">
     <view class='tapbar past-activity'>
-      <view class='title'>
+      <view class='title font-12pt'>
         <text>往期活动</text>
       </view>
       <view class='activity-list'>
@@ -48,17 +49,17 @@
             </view>
             <view class='detail'>
               <view class='des'><text>{{item.name}}</text></view>
-              <view class='time'><text>{{item.updatetimedate}}</text></view>
+              <view class='time font-10pt'><text>{{item.updatetimedate}}</text></view>
             </view>
         </view>
        </navigator>
 
       </view>
-
+      <weui-loadmore isHideLoadMore="{{loadingMoreHidden}}"></weui-loadmore>
     </view>
   </block>
   <block wx:else>
-    <view class='tapbar none-activity'><text>暂无活动...</text></view>
+    <view class='tapbar none-activity'><text class='font-10pt'>暂无活动...</text></view>
   </block>
 
 </view>

@@ -1,18 +1,18 @@
 <import src="../../utils/wux-components/gallery/gallery.wxml" />
 <template is="gallery" data="{{ ...$wux.gallery }}"/>
 
-<view class='page'>
+<view class='page font-10pt'>
   <view class='container user-area flex'>
     <view class='avatar-container flex'>
-      <view class='item follow flex'><text class='num'>{{userinfo.userFollowCount}}</text><text>关注</text></view>
+      <view class='item follow flex'><text class='num font-17pt'>{{userinfo.userFollowCount}}</text><text>关注</text></view>
       <view class='item avatar'><image src="{{userinfo.avatar}}"></image></view>
-      <view class='item fans flex'><text class='num'>{{userinfo.followCount}}</text><text>粉丝</text></view>
+      <view class='item fans flex'><text class='num font-17pt'>{{userinfo.followCount}}</text><text>粉丝</text></view>
     </view>
     <view class='detail-container flex'>
-      <view class='name flex'><text>{{userinfo.nickname}}</text>
+      <view class='name flex'><text class='font-11pt'>{{userinfo.nickname}}</text>
         <icon wx:if="{{identification}}" class='icon' type='success' size='14' color='#333333'></icon>
       </view>
-      <view class='gender-birthday flex'>
+      <view class='gender-birthday flex font-9pt'>
         <block wx:if="{{userinfo.gender=='male'}}">
           <view class='item capsule gender male'>
             <text class='iconfont  icon-xingbienan'></text>
@@ -29,12 +29,12 @@
           <view><text>{{userinfo.constellation}}</text></view>
         </view>
       </view>
-      <view class='focus-btn'>
+      <view class='focus-btn font-10pt'>
         <block wx:if="{{userinfo.relationshop<2}}">
-          <text bindtap='focus' class='capsule'>+ 关注</text>
+          <text bindtap='focus' class='capsule'><text class='font-12pt'>+ </text>关注</text>
         </block>
         <block wx:else>
-          <text bindtap='focusCancle' class='capsule'>已关注</text>
+          <text bindtap='focusCancle' class='capsule focus'>已关注</text>
         </block>     
       </view>
     </view>
@@ -50,8 +50,8 @@
           </view>
           <view wx:elif='{{index==5}}' class="album-item" bindtap="showGallery" data-current="{{ index }}">
             <image lazy-load mode="aspectFill" class="album-item__img" src="{{ item.image }}" />
-            <view wx:if='{{urls.length>5}}' class="more flex" bindtap="showGallery" data-current=''>
-              <text>MORE</text>
+            <view wx:if='{{urls.length>6}}' class="more flex font-11pt" bindtap="showGallery" data-current=''>
+              <text>More</text>
             </view>
           </view>
         </block>
@@ -102,14 +102,14 @@
           <text wx:else>相互关注后可查看</text>
         </view>
       </view>
-      <view class='flex '>
+      <view class='flex bottom-border'>
         <view class='item-a'>购房情况</view>
         <view class='item-b'>
           <text wx:if="{{userinfo.relationshop==2}}">{{userinfo.hashouse}}</text>
           <text wx:else>相互关注后可查看</text>
         </view>
       </view>
-      <view class='flex '>
+      <view class='flex bottom-border'>
         <view class='item-a'>情感状态</view>
         <view class='item-b'>
           <text wx:if="{{userinfo.relationshop==2}}">{{userinfo.maritalStatus}}</text>
@@ -155,5 +155,5 @@
 
 </view>
 <view class='message-btn'>
-  <navigator hover-class="navigator-hover" url="/pages/chat/index?userid={{userinfo.userid}}"><button><text class='iconfont icon-qipao message'></text>私信</button></navigator>
+  <navigator hover-class="navigator-hover" url="/pages/chat/index?userid={{userinfo.userid}}"><button class='font-11pt'><text class='iconfont icon-qipao message font-15pt'></text><text>留言</text></button></navigator>
 </view>

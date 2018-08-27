@@ -13,18 +13,12 @@ Page({
         this.setData({
           token: res.data
         })
-        console.log(this.data.token);
         this.redirectToList()
       },
       fail: (res) => {
-        console.log("login in")
-        // 页面初始化 options为页面跳转所带来的参数
-        
+        this.redirectToIndex()
       }
     })
-
-
-
   },
   onReady: function () {
     // 页面渲染完成
@@ -48,6 +42,10 @@ Page({
       url: '../ListView/ListView'
     })
 
+  },
+  redirectToIndex: function () {
+    wx.redirectTo({
+      url: '../index2/index',
+    })
   }
-
 })

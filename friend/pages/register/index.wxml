@@ -1,5 +1,5 @@
 <block wx:if="{{which}}">
-  <view class="content">
+  <view class="content font-10pt">
       <view class = "logo">
           <image mode="aspectFit" src="/images/Hello.png"></image>
       </view>
@@ -14,10 +14,16 @@
             </view>
 
           </view>
-          <view class="btn-area">
+          <view class="btn-area font-11pt">
               <button  disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{registBtnTxt}} </button>
-              <view class="txt-area">
-                  <view>我已阅读并同意<text class='warn-info' bindtap='tri'>海论交友用户协议</text></view>
+              <view class="txt-area ">
+                  <view class='xieyi'>
+                  
+                    <radio-group class="radio-group" bindchange="xchange">
+                       <radio bindchange="xchange" color='#cccccc'></radio>
+                    </radio-group>
+                  
+                  我已阅读并同意<text class='warn-info' bindtap='tri'>海论交友用户协议</text></view>
               </view>
           </view>
       </form>

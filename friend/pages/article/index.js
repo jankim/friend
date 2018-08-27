@@ -21,13 +21,19 @@ Page({
       },
       needLoadingIndicator: true,
       success: (rel) => {
-        var article = rel.data.data.article.content
-        console.log(article)
-        console.log(rel.data.data.article.content)
-        WxParse.wxParse('article', 'html', article, this, 5);
-        wx.setNavigationBarTitle({
-          title: rel.data.data.article.title
-        })
+        if (rel.data.code == "1") {
+          var article = rel.data.data.article.content;
+          WxParse.wxParse('article', 'html', article, this, 5);
+          wx.setNavigationBarTitle({
+            title: rel.data.data.article.title
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '系统异常，请稍候再试'
+          })
+        }
 
       }
     }
@@ -43,16 +49,16 @@ Page({
       path: util.getCurrentPageUrlWithArgs(),
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: "none",
-          title: '分享成功',
-        })
+        // wx.showToast({
+        //   icon: "none",
+        //   title: '分享成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: "none",
-          title: '分享失败',
-        })
+        // wx.showToast({
+        //   icon: "none",
+        //   title: '分享失败',
+        // })
       }
     }
   },

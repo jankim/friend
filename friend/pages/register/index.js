@@ -15,7 +15,8 @@ Page({
     inputPassword: '',
     phoneNum: '',
     openid : "",
-    which: true
+    which: true,
+    isAllow: false
   },
   onLoad: function (options) {
     wx.getStorage({
@@ -85,6 +86,12 @@ Page({
       which: !this.data.which
     })
   },
+  xchange() {
+    this.setData({
+      isAllow: !this.data.isAllow
+    })
+    
+  },
   onReady: function () {
     // 页面渲染完成
 
@@ -143,8 +150,20 @@ Page({
     console.log(param);
     this.mysubmit(param);
   },
+  checkAll(){
+    if (!this.data.isAllow) {
+      wx.showModal({
+        title: '提示',
+        content: '你必须同意海论交友用户协议！',
+      })
+      return
+    }
+    return true
+  },
   mysubmit: function (param) {
-    var flag = this.checkUserName(param.username) && this.checkPhone(param.phone) && this.checkPassword(param) && this.checkSmsCode(param)
+    var flag = this.checkUserName(param.username) && this.checkPhone(param.phone) && this.checkPassword(param) && this.checkSmsCode(param) && this.checkAll()
+
+    
     var that = this; 
     if (flag) {
       this.setregistData1();

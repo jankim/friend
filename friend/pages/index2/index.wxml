@@ -1,0 +1,18 @@
+<view class="content font-12pt">
+    <!-- <view class = "logo">
+        <image mode="aspectFit" src="/images/index.jpg"></image>
+    </view> -->
+       
+    <view class='nav-btn-area font-16px'>
+      <view class="btn blue">
+        <navigator open-type="navigate" url="../login/index" hover-class="btn-hover"><text> 海论账号登录</text></navigator> 
+      </view>
+      <view class="btn white">
+        <navigator open-type="navigate" url="../register/index" hover-class="btn-hover2"><text>注册</text></navigator> 
+      </view>
+
+      <view class="txt-area">
+        <navigator open-type="switchTab" url="../ListView/ListView" hover-class="none"><text class="register font-9pt">随便看看</text></navigator> 
+      </view>
+    </view>
+</view>

@@ -1,1 +1,5 @@
 @import "../activityList/index.wxss";
+.page{background: #fff}
+page {
+min-height:100vh;
+}

@@ -1,0 +1,7 @@
+<view class="weui-loadmore" wx:if="{{isHideLoadMore == 1}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view class="weui-loadmore" wx:elif="{{isHideLoadMore == 2}}">
+    <view class="weui-none__tips">没有更多啦</view>
+</view>

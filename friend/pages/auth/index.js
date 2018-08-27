@@ -38,14 +38,14 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
           wx.showModal({
             title: '提示',
             showCancel: false,
-            content: rel.data.msg
+            content: '系统异常，请稍候再试'
           })
         }
       }
@@ -90,19 +90,15 @@ Page({
                   imgFace: data.data.image
                 })
               }
+              app.jamasTool.showToast(data.msg);
 
-              wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: data.msg
-              })
             } else if (data.code == "401") {
               wx.showModal({
                 title: '提示',
                 showCancel: false,
                 content: data.msg,
                 success: (res) => {
-                  this.redirectToLogin();
+                  app.jamasTool.goToLogin()
                 }
               })
             } else {
@@ -169,14 +165,18 @@ Page({
       wx.showModal({
         title: '提示',
         showCancel: false,
-        content: '请输入正确的姓名'
+        content: '请输入正确的照片'
       });
       return false;
     }
   }, 
   submit() {
-    this.checkName(this.data.Name) && this.checkIdNo(this.data.Id) && this.checkImage(this.data.img) && this.checkImage(this.data.imgFace)
+    let result = this.checkName(this.data.Name) && this.checkIdNo(this.data.Id) && this.checkImage(this.data.img) && this.checkImage(this.data.imgFace)
     
+    if (!result){
+      return false
+    }
+
     let params = {
       url: 'user/auth',
       header: {
@@ -192,24 +192,26 @@ Page({
       success: (rel) => {
 
         if (rel.data.code == "1") {
-          wx.showToast({
-            icon: 'none',
-            title: '上传成功，等待系统审核',
-            duration: 2000
-          })
 
-          setTimeout(function(){
+          setTimeout(function () {
             wx.switchTab({
               url: '/pages/my/index',
             })
-          },2000)
+          }, 3000)
+
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '上传成功，等待系统审核'
+          })
+          
         } else if (rel.data.code == "401") {
           wx.showModal({
             title: '提示',
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -229,25 +231,20 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

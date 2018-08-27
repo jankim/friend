@@ -43,9 +43,9 @@ Page({
 
   },
   redirectToRegister: function () {
-    wx.redirectTo({
-      url: '../register/index'
-    })
+    // wx.redirectTo({
+    //   url: '../register/index'
+    // })
   },
   nativeChange({ detail }) {
 
@@ -125,7 +125,7 @@ Page({
               showCancel: false,
               content: data.msg,
               success: (res) => {
-                this.redirectToLogin();
+                app.jamasTool.goToLogin()
               }
             })
           }else {
@@ -166,17 +166,10 @@ Page({
       success: (res) => {
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
-
-
         wx.navigateTo({
           url: `../avatarUpload/getavater/upload?src=${src}`
         })
       }
     })
   }, 
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
-  },
 })

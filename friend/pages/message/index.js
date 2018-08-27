@@ -1,8 +1,7 @@
 var app = getApp();
-var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data: {
-    loadingMoreHidden: true,
+    loadingMoreHidden: 0,
     foucsCnt: 0,
     fansCnt: 0,
     vistorCnt: 0,
@@ -14,7 +13,6 @@ Page({
     this.setData({
       token: app.jamasTool.getUserToken()
     })
-    register.register(this);
     
 
   },
@@ -45,30 +43,24 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: rel.data.msg,
-            showCancel: false,
-            content: rel.data.data.err
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       },
       complete: () => {
-        register.loadFinish(this, false);
+        wx.stopPullDownRefresh()
       }
     }
     app.jamasTool.request(params);
   },
   onShow: function () {
-    console.log("onShow");
     this.getData()
   },
-  refresh: function () {
+  onPullDownRefresh: function () {
     this.setData({
-      loadingMoreHidden: true,
       page: 0,
       userFocusList: [
       ],
@@ -76,33 +68,26 @@ Page({
 
     this.getData()
   },
-  loadMore: function () {
-  },
   onShareAppMessage: function (ops) {
     if (ops.from === 'button') {
       console.log(ops.target)
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

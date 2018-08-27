@@ -1,9 +1,6 @@
 <!--pages/my/index.wxml-->
-<include src="../../utils/loadMoreFooterView.wxml"/>
-<include src="../../utils/refreshHeaderView.wxml"/>
-<view  class="container">
-  <scroll-view class="scroll_container" scroll-y="true" style="position:relation;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
-    <view style="width:100%;height:100%" bindtouchmove="move">
+<view  class="container font-11pt">
+  <view class="scroll_container"> 
       <block wx:for="{{userFocusList}}" wx:key="{{item.id}}">
         <navigator url="/pages/user/index?userid={{item.id}}" hover-class="navigator-hover">
           <view class='tapbar'>
@@ -19,13 +16,13 @@
               <view class='userinfo  h-130'>
                 <text class='name'>{{item.nickName}}</text>
                 <block wx:if="{{item.gender=='male'}}">
-                  <view class='gender male'>
+                  <view class='gender male font-8pt'>
                     <text class='iconfont  icon-xingbienan'></text>
                     <text>{{item.age}}</text>
                   </view>
                 </block>
                 <block wx:else>
-                  <view class='gender female'>
+                  <view class='gender female font-8pt'>
                     <text class='iconfont  icon-xingbienv'></text>
                     <text>{{item.age}}</text>
                   </view>
@@ -34,15 +31,15 @@
             </view> 
 
             <view class='right border-bottom'>
-                <text class='capsule'>{{item.time}}</text>
+                <text class='capsule font-9pt'>{{item.time}}</text>
             </view>
 
           </view>
         </navigator>
       </block>
-      <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods"><text>没有更多啦</text></view>
-    </view>
+      <weui-loadmore isHideLoadMore="{{loadingMoreHidden}}"></weui-loadmore>
+
    
-  </scroll-view>
+  </view>
 </view>
 

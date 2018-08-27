@@ -26,7 +26,7 @@ Page({
       fail: (res)=>{
         console.log("login in")
         // 页面初始化 options为页面跳转所带来的参数
-        this.redirectToLogin()
+        app.jamasTool.goToLogin()
       }
     })
   },
@@ -103,6 +103,7 @@ Page({
         data: {
           mobile: param.phone,
           captcha: param.smsCode,
+          event: "activation",
         },
         success: (rel) => {
           console.log(rel)
@@ -116,7 +117,7 @@ Page({
             content: rel.data.msg,
             success: ()=>{
               if (rel.data.code == "401"){
-                this.redirectToLogin()
+                app.jamasTool.goToLogin()
               } else if (rel.data.code == "1") {
                 this.redirectToMyself()
               }
@@ -241,26 +242,21 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
   redirectToMyself: function () {
     wx.switchTab({

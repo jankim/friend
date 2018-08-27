@@ -1,7 +1,7 @@
 <!--pages/my/index.wxml-->
-<view class="container">
+<view class="container font-11pt">
     <view>
-      <view class='tapbar'>
+      <view class='tapbar mt0'>
         <navigator url="/pages/privacyset/index" hover-class="navigator-hover">
           <view class='cell border-bottom'>
             <view class='left'>
@@ -42,7 +42,7 @@
         </navigator> 
 
         <navigator url="/pages/about/index" hover-class="navigator-hover">  
-          <view class='cell border-bottom'>
+          <view class='cell'>
             <view class='left'>
             <text>关于我们</text>        
             </view>          
@@ -57,7 +57,7 @@
       </view>
 
       <view class='tapbar'>
-        <view class='cell'><button class='logout-btn' bindtap='logout'>退出登录</button></view>
+        <view class='cell'><button class='logout-btn font-12pt' bindtap='logout'>退出登录</button></view>
       </view>
     </view>
 

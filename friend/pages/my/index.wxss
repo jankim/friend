@@ -1,27 +1,23 @@
-/* pages/my/index.wxss */
+@import '../../utils/font2.wxss';
 .container {
   min-height:100vh;
 }
-
-
 .tapbar{
   margin-top: 20rpx;
 	background-color: #fff;
 	padding: 0 30rpx;
   clear: both
 }
-
 .user-info{
+  margin-top: 0;
 	background-color: #fff;
   height: 250rpx;
-  
 }
 .user-info image{
 	display: block;
 	width: 150rpx;
 	height: 150rpx;
 	border-radius: 50%;
-	box-shadow: 0 0 20rpx rgba(0,0,0,.2)
 }
 .user-info .user-avatar{
   width: 190rpx;
@@ -63,17 +59,15 @@
 .user-info .edit-user text{
 	display: block;
 	text-align: left;
-  padding: 10rpx 0;
+  padding: 5rpx 0;
  
 }
 .user-info .edit-user .nickName{
   color: #414141;
-	font-size: 22px; 
 
 }
 .user-info .edit-user .edit-des{
   color: #aaaaaa;
-  font-size: 16px; 
 }
 
 .cell{
@@ -82,7 +76,6 @@
   flex-direction: row;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 16px;
   color: #414141;
 }
 .cell .left{
@@ -98,22 +91,22 @@
   text-align:right;
 
 }
-.cell .go .num{color: #aaaaaa}
-.arrow{
-  display: inline-block;
-  transform:scaleY(1.5);
-  padding-left: 10rpx;
-}
+.icon-jiantou{color: #cccccc;opacity: 0.5}
+.cell .go .num{color: #cccccc;padding-right:10rpx;}
 .capsule{
-  width: 150rpx;
+  width: 120rpx;
   height: 45rpx;
   line-height: 45rpx;
-  border-radius: 10rpx;
+  border-radius: 6rpx;
   display: inline-block;
   text-align: center
 }
 .tobe{
   background: #cccccc;
+  color: #fff;
+}
+.wait{
+  background: #f06e7d;
   color: #fff;
 }
 .had{
@@ -133,17 +126,9 @@
 color:#414141;
 background-color:#fff;
 text-align: left;
-font-size:16px;
 padding: 0;
 line-height: 100rpx;
 }
-
-
-
-
-
-
-
 
 .btn-login{
 	position: absolute;
@@ -162,3 +147,4 @@ line-height: 100rpx;
 .gray{
 	background-color: #ccc;
 }
+.cell .share .go{width: 60rpx}

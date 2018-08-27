@@ -120,7 +120,7 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res)=>{
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -155,7 +155,7 @@ Page({
     //生日只能修改一次
     if (this.data.birthdaychange > 0){
       wx.showModal({
-        title: app.globalData.message1,
+        content: app.globalData.message1,
         showCancel: false
       })
       return
@@ -177,7 +177,7 @@ Page({
         //身高只能修改一次
         if (this.data.heightchange > 0) {
           wx.showModal({
-            title: app.globalData.message1,
+            content: app.globalData.message1,
             showCancel: false
           })
           return
@@ -210,7 +210,7 @@ Page({
         //学历只能修改3次
         if (this.data.educationchange > 2) {
           wx.showModal({
-            title: app.globalData.message1,
+            content: app.globalData.message1,
             showCancel: false
           })
           return
@@ -241,7 +241,7 @@ Page({
         //收入只能修改10次
         if (this.data.incomechange > 9) {
           wx.showModal({
-            title: app.globalData.message1,
+            content: app.globalData.message1,
             showCancel: false
           })
           return
@@ -363,7 +363,8 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/my/index',
+      path: app.globalData.sharePath,
+      imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
         console.log("转发成功:" + JSON.stringify(res));
       },
@@ -374,7 +375,7 @@ Page({
   },
   changeGender(){
     wx.showModal({
-      title: app.globalData.message1,
+      content: app.globalData.message1,
       showCancel: false
     })
   },
@@ -382,7 +383,7 @@ Page({
     let dataArr = data.split("-");
     let m = dataArr[1]
     let d = dataArr[2]
-    return "魔羯水瓶双鱼牡羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2);
+    return "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2);
   },
   checkUserName(e) {
     let nickName = e.detail.value
@@ -451,7 +452,7 @@ Page({
               showCancel: false,
               content: rel.data.msg,
               success: (res) => {
-                this.redirectToLogin();
+                app.jamasTool.goToLogin()
               }
             })
           }else {
@@ -495,7 +496,7 @@ Page({
               showCancel: false,
               content: data.msg,
               success: (res) => {
-                this.redirectToLogin();
+                app.jamasTool.goToLogin()
               }
             })
           } else {
@@ -515,32 +516,5 @@ Page({
 
 
 
-  },
-  onShareAppMessage: function (ops) {
-    if (ops.from === 'button') {
-      console.log(ops.target)
-    }
-    return {
-      title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
-      imageUrl: app.globalData.shareimageUrl,
-      success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
-      },
-      fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
-      }
-    }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

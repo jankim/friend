@@ -33,15 +33,11 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       }
     }
@@ -87,15 +83,11 @@ Page({
                 showCancel: false,
                 content: rel.data.msg,
                 success: (res) => {
-                  _this.redirectToLogin();
+                  app.jamasTool.goToLogin()
                 }
               })
             } else {
-              wx.showModal({
-                title: '提示',
-                showCancel: false,
-                content: rel.data.msg
-              })
+              app.jamasTool.showToast('服务器繁忙，请稍候再试');
             }
           }
         }
@@ -150,7 +142,7 @@ Page({
                 showCancel: false,
                 content: data.msg,
                 success: (res) => {
-                  this.redirectToLogin();
+                  app.jamasTool.goToLogin()
                 }
               })
             } else {
@@ -180,25 +172,20 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

@@ -1,7 +1,7 @@
 <!--pages/my/index.wxml-->
-<view class="container">
+<view class="container font-11pt">
     <navigator url="/pages/basicinfo/index" hover-class="navigator-hover">
-      <view class="user-info tapbar">
+      <view class="tapbar user-info ">
         <block wx:if="{{userInfo.avatarUrl != ''}}">
           <view class='user-avatar'>
             <image src="{{userInfo.avatarUrl}}"></image>
@@ -9,11 +9,11 @@
         </block>
         <view class='edit-user'>
           <view class='edit-user2'>
-            <text class='nickName'>{{userInfo.nickName}}</text>
-            <text class='edit-des'>查看或编辑个人资料</text>
+            <text class='nickName font-18pt'>{{userInfo.nickName}}</text>
+            <text class='edit-des font-12pt'>编辑资料</text>
           </view>
           <view class='go'>
-            <text class='arrow'> ></text> 
+            <text class='iconfont icon-jiantou'></text> 
           </view>    
         </view>
   
@@ -24,15 +24,15 @@
       <view class='tapbar'>
         <navigator url="/pages/auth/index" hover-class="navigator-hover">
           <view class='cell blue'>
-            <text class='left'>开通实名认证</text>
+            <text class='left font-12pt'>开通实名认证</text>
             <view wx:if="{{userInfo.identification_status=='0'}}" class='go'>
-              <text class='capsule tobe'>待认证</text>
+              <text class='capsule tobe font-10pt'>待认证</text>
             </view>
             <view wx:elif="{{userInfo.identification_status=='1'}}" class='go'>
-              <text class='capsule tobe'>待审核</text>
+              <text class='capsule wait font-10pt'>待审核</text>
             </view>  
             <view wx:else class='go'>
-              <text class='capsule had'>已认证</text>
+              <text class='capsule had font-10pt'>已认证</text>
             </view> 
         </view>
         </navigator>
@@ -44,10 +44,10 @@
             <view class='left'>
             <text>我的相册</text>        
             </view> 
-            <view class='go'>
+            <view class='go font-10pt'>
               <view>
                 <text class='num'>{{userInfo.myAlbums}}</text> 
-                <text class='arrow'> ></text> 
+                <text class='iconfont icon-jiantou'></text> 
               </view>  
             </view>  
           </view>
@@ -58,10 +58,10 @@
             <view class='left'>
             <text>我的关注</text>        
             </view> 
-            <view class='go'>
+            <view class='go font-10pt'>
               <view>
                 <text class='num'>{{userInfo.myFolloweCount}}</text> 
-                <text class='arrow'> ></text> 
+                <text class='iconfont icon-jiantou'></text> 
               </view>  
             </view>  
           </view>
@@ -72,10 +72,10 @@
             <view class='left'>
             <text>我的粉丝</text>        
             </view>        
-            <view class='go'>
+            <view class='go font-10pt'>
               <view>
                 <text class='num'>{{userInfo.followMeCount}}</text> 
-                <text class='arrow'> ></text> 
+                <text class='iconfont icon-jiantou'></text> 
               </view>  
             </view>  
           </view>
@@ -86,10 +86,10 @@
             <view class='left'>
             <text>谁看过我</text>        
             </view>          
-            <view class='go'>
+            <view class='go font-10pt'>
               <view>
                 <text class='num'>{{userInfo.seeMeCount}}</text> 
-                <text class='arrow'> ></text> 
+                <text class='iconfont icon-jiantou'></text> 
               </view>  
             </view>  
           </view>
@@ -97,13 +97,17 @@
           
         <view class='cell '>
           <view class='left'>
-             <button class='share' id="shareBtn" open-type="share" hover-class="other-button-hover">
+             <button class='share font-11pt' id="shareBtn" open-type="share" hover-class="other-button-hover">
               邀请好友
             </button>         
           </view>          
-          <view class='go'>
-            <text class='arrow'> ></text> 
-          </view>  
+          
+            <button class='share font-10pt' id="shareBtn2" open-type="share" hover-class="other-button-hover" > 
+              <view class='go'>
+              <text class='iconfont icon-jiantou'></text> 
+               </view>  
+            </button>    
+         
         </view>
       </view>
 

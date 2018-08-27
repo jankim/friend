@@ -1,9 +1,8 @@
 var app = getApp();
 var util = require("../../utils/util.js");
-var register = require('../../utils/refreshLoadRegister.js');
 Page({
   data:{
-    loadingMoreHidden: true,
+    loadingMoreHidden: 0,
     userFocusList:[
     ],
     page: 0,
@@ -14,7 +13,7 @@ Page({
     this.setData({
       token: app.jamasTool.getUserToken()
     })
-    register.register(this);
+
 
     this.doLoadData({
       page: this.data.page
@@ -66,7 +65,7 @@ Page({
                   showCancel: false,
                   content: rel.data.msg,
                   success: (res) => {
-                    this.redirectToLogin();
+                    app.jamasTool.goToLogin()
                   }
                 })
               } else {
@@ -121,7 +120,7 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -167,12 +166,13 @@ Page({
 
             this.setData({
               page: page,
+              loadingMoreHidden: 0,
               userFocusList: [...this.data.userFocusList, ...userFocusList],
             })
 
           } else {
             this.setData({
-              loadingMoreHidden: false
+              loadingMoreHidden: 2
             })
           }
 
@@ -182,36 +182,34 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       },
       complete: () => {
-        register.loadFinish(this, true);
+        wx.stopPullDownRefresh()
       }
     }
     app.jamasTool.request(params2);
   },
-  refresh: function () {
+  onPullDownRefresh: function () {
     this.setData({
-      loadingMoreHidden: true,
       page: 0,
       userFocusList: [
       ],
     })
-
+    console.log(1)
     this.doLoadData({
       page: this.data.page
     });
   },
-  loadMore: function () {
+  onReachBottom: function () {
+    this.setData({
+      loadingMoreHidden: 1,
+    })
     this.doLoadData({
       page: this.data.page
     });
@@ -222,25 +220,20 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })

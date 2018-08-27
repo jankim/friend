@@ -1,2 +1,2 @@
 @import "../register/index.wxss";
-.content{margin-top: 110rpx;}
+.content{margin-top: 150rpx;}

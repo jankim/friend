@@ -1,0 +1,15 @@
+/*.myprogress{margin:5px 0}*/
+.content{min-height: 100vh;background: url('http://file.haining.cn/xcx/index.jpg')  no-repeat center;background-size:100%;display: flex;justify-content: center;position: relative;}
+.logo{margin-top: 100rpx;margin-bottom: 120rpx}
+.logo image{width:640rpx;}
+.content{text-align: center}
+.logo{margin-top: 100rpx;margin-bottom: 120rpx}
+.logo image{width:640rpx;}
+.nav-btn-area{text-align: center;position: fixed;bottom:35rpx;color:#999999}
+.btn{width: 600rpx;height: 90rpx;display: inline-block;border-radius: 6rpx;margin-top: 35rpx;line-height:90rpx;
+}
+.blue{background: #0092ff;color: white}
+.white{background: #fff;color: #333333}
+.border-1px{border: 1px solid #0092ff}
+.nav-btn-area .txt-area{color: #999999;padding: 10rpx;}
+.register{text-decoration: underline;}

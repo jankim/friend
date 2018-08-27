@@ -1,5 +1,5 @@
 <!--pages/my/index.wxml-->
-<view class="container">
+<view class="container font-11pt">
     <view>
       <view class='tapbar'>
         <view class='cell border-bottom'>
@@ -8,7 +8,7 @@
           </view> 
           <view class='go'>
             <view>
-              <input password bindchange="oldpassword" value='{{oldpassword}}' placeholder-class="phcolor" placeholder='请输入原密码'></input>
+              <input password bindblur="oldpassword" bindchange="oldpassword" value='{{oldpassword}}' placeholder-class="phcolor" placeholder='请输入原密码'></input>
             </view>  
           </view>  
         </view>
@@ -21,7 +21,7 @@
           </view> 
           <view class='go'>
             <view>
-              <input password bindchange="password1" value='{{password1}}' placeholder-class="phcolor" placeholder='请设置新密码'></input>
+              <input password bindblur="password1" bindchange="password1" value='{{password1}}' placeholder-class="phcolor" placeholder='请设置新密码'></input>
             </view>  
           </view>  
         </view>
@@ -35,14 +35,14 @@
           </view> 
           <view class='go'>
             <view>
-              <input password bindchange="password2" value='{{password2}}' placeholder-class="phcolor" placeholder='请再一次确认密码'></input>
+              <input password bindblur="password2" bindchange="password2" value='{{password2}}' placeholder-class="phcolor" placeholder='请再一次确认密码'></input>
             </view>  
           </view>  
         </view>
       </view>
 
       <view class='btn-area'>
-        <button bindtap='submit'>确认</button>
+        <button class='font-11pt' bindtap='submit' hover-class="btn-hover">确认</button>
       </view>
 
     </view>

@@ -1,58 +1,56 @@
 <!--pages/my/index.wxml-->
-<include src="../../utils/loadMoreFooterView.wxml"/>
-<include src="../../utils/refreshHeaderView.wxml"/>
-<view  class="container">
-  <scroll-view class="scroll_container" scroll-y="true" style="position:relation;width:100%;left:0;height:{{windowHeight}}px;top:{{loadMoreHeight == 0? refreshHeight:-loadMoreHeight}}px;bottom:{{loadMoreHeight}}px;"  bindscroll="scroll" bindscrolltolower="lower" bindscrolltoupper="upper" bindtouchstart="start" bindtouchend="end" > 
-    <view style="width:100%;height:100%" bindtouchmove="move">
-      <block wx:for="{{userFocusList}}" wx:key="{{item.id}}">
-        
-          <view class='tapbar'>
-            
-            <view class=' h-130 left'>
-              <navigator url="/pages/user/index?userid={{item.id}}" hover-class="navigator-hover">
-                <view class="user-info">
-                  <view class='user-avatar'>
-                    <image src="{{item.avatar}}"></image>
-                  </view>
+<view  class="container font-11pt">
+  <view class="scroll_container"> 
+
+    <block wx:for="{{userFocusList}}" wx:key="{{item.id}}">
+      
+        <view class='tapbar'>
+          
+          <view class=' h-130 left'>
+            <navigator url="/pages/user/index?userid={{item.id}}" hover-class="navigator-hover">
+              <view class="user-info">
+                <view class='user-avatar'>
+                  <image src="{{item.avatar}}"></image>
                 </view>
-              </navigator>
-            </view> 
-
-            <view class='middle border-bottom'>
-              <navigator url="/pages/user/index?userid={{item.id}}" hover-class="navigator-hover">
-              <view class='userinfo  h-130'>
-                <text class='name'>{{item.nickName}}</text>
-                <block wx:if="{{item.gender=='male'}}">
-                  <view class='gender male'>
-                    <text class='iconfont  icon-xingbienan'></text>
-                    <text>{{item.age}}</text>
-                  </view>
-                </block>
-                <block wx:else>
-                  <view class='gender female'>
-                    <text class='iconfont  icon-xingbienv'></text>
-                    <text>{{item.age}}</text>
-                  </view>
-                </block>
               </view>
-              </navigator>
-            </view> 
+            </navigator>
+          </view> 
 
-            <view class='right border-bottom'>
-              <block wx:if="{{item.focus}}">
-                <text class='capsule focus' bindtap='focusCancle' data-index='{{index}}' data-id='{{item.id}}'>已关注</text>
+          <view class='middle border-bottom'>
+            <navigator url="/pages/user/index?userid={{item.id}}" hover-class="navigator-hover">
+            <view class='userinfo  h-130'>
+              <text class='name'>{{item.nickName}}</text>
+              <block wx:if="{{item.gender=='male'}}">
+                <view class='gender male font-8pt'>
+                  <text class='iconfont  icon-xingbienan'></text>
+                  <text>{{item.age}}</text>
+                </view>
               </block>
               <block wx:else>
-                <text class='capsule no-focus' bindtap='focus' data-index='{{index}}' data-id='{{item.id}}'>关注</text>
+                <view class='gender female font-8pt'>
+                  <text class='iconfont  icon-xingbienv'></text>
+                  <text>{{item.age}}</text>
+                </view>
               </block>
             </view>
+            </navigator>
+          </view> 
 
+          <view class='right border-bottom font-10pt'>
+            <block wx:if="{{item.focus}}">
+              <text class='capsule focus' bindtap='focusCancle' data-index='{{index}}' data-id='{{item.id}}'>已关注</text>
+            </block>
+            <block wx:else>
+              <text class='capsule no-focus' bindtap='focus' data-index='{{index}}' data-id='{{item.id}}'>关注</text>
+            </block>
           </view>
-        
-      </block>
-      <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods"><text>没有更多啦</text></view>
-    </view>
+
+        </view>
+      
+    </block>
+    <weui-loadmore isHideLoadMore="{{loadingMoreHidden}}"></weui-loadmore>
+
     
-  </scroll-view>
+  </view>
 </view>
 

@@ -17,7 +17,6 @@
   flex-direction: row;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 16px;
   color: #414141;
 }
 .cell .left{

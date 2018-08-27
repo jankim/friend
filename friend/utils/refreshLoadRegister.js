@@ -7,8 +7,8 @@ function register(context,json){
   context.setData({
     pull: true,//true 下拉刷新状态或者上拉加载更多状态   false 释放
     loading: false,//是否在加载中  
-    refreshing_text: '下拉刷新',
-    loading_text: '上拉加载更多',
+    refreshing_text: '',
+    loading_text: '',
     loadingHeight: 48,//正在加载时高度
     refreshHeight: 0,//刷新布局高度  
     loadMoreHeight: 0,//加载更多布局高度
@@ -73,8 +73,8 @@ function start(context,e) {
     refreshHeight: 0,
     loadMoreHeight: 0,
     pull: true,
-    refreshing_text: '下拉刷新',
-    loading_text: '上拉加载更多'
+    refreshing_text: '',
+    loading_text: ''
   });
 }
 function end(context,e) {
@@ -175,7 +175,7 @@ function move(context,e) {
     } else {
       context.setData({
         pull: true,
-        refreshing_text: '上拉加载更多'
+        refreshing_text: ''
       })
     }
   }

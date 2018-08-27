@@ -15,36 +15,11 @@ Page({
   },
 // 页面加载
   onLoad:function(){
-    wx.getStorage({
-      key: 'token',
-      success: (res) => {
-        this.setData({
-          token: res.data
-        })
-        console.log(this.data.token);
-      },
-      fail: (res) => {
-        console.log("login in")
-        // 页面初始化 options为页面跳转所带来的参数
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: "未登录",
-          success: ()=>{
-            this.redirectToLogin()
-          }
-        })
-        
-      }
-    })
-
     this.setData({
       token: app.jamasTool.getUserToken()
     })
   },
   onShow: function(){
-    console.log(this.data.token);
-
     let params3 = {
       url: 'Operate/getMyFansCount',
       header: {
@@ -73,28 +48,17 @@ Page({
               avatarUrl: rel.data.data.userinfo.avatar,
               nickName: rel.data.data.userinfo.nickname,
               identification_status: rel.data.data.userinfo.identification_status,
-              followMeCount: rel.data.data.followMeCount,
-              myFolloweCount: rel.data.data.myFolloweCount,
-              seeMeCount: rel.data.data.seeMeCount,
-              myAlbums: rel.data.data.myAlbums
+              followMeCount: rel.data.data.followMeCount == '0' ? '' : rel.data.data.followMeCount,
+              myFolloweCount: rel.data.data.myFolloweCount == '0' ? '' : rel.data.data.myFolloweCount,
+              seeMeCount: rel.data.data.seeMeCount == '0' ? '' : rel.data.data.seeMeCount,
+              myAlbums: rel.data.data.myAlbums == '0' ? '' : rel.data.data.myAlbums
             }
           })
           console.log(this.data);
         } else if (rel.data.code == "401") {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg,
-            success: (res) => {
-              this.redirectToLogin();
-            }
-          })
+          app.jamasTool.goToLogin()
         } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       }
     }
@@ -107,26 +71,21 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
   redirectFill: function () {
     wx.redirectTo({

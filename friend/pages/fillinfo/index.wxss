@@ -6,7 +6,6 @@
 
 .h5-title{
   margin-top: 100rpx;
-  font-size: 42rpx;
 }
 .date-picker{
   margin-top: 150rpx;
@@ -14,7 +13,6 @@
 
 .gender-container{
   text-align: center;
-  font-size: 36rpx; 
 }
 .gender-container .gender-famale image{
   width: 201rpx;
@@ -80,12 +78,10 @@
 .avatar-container-detial .nickname{
   display: block;
    padding: 30rpx 30rpx;
-  font-size: 40rpx;
 }
 .avatar-container-detial .detail
 {
   display: block;
-  font-size: 14px;
   color: #cccccc;
   padding: 0rpx 30rpx;
 }
@@ -102,7 +98,6 @@
   background:#000;
   color:white;
   opacity:0.4;
-  font-size: 30rpx;
 }
 .avatar-container image{
   width: 540rpx;
@@ -119,10 +114,10 @@
 }
 .btn{
   position:relative;
+  width: 690rpx;
   padding-left:15rpx;
   padding-right:15rpx;
-  border-radius:10rpx;
-  font-size:32rpx;
+  border-radius:6rpx;
   height:90rpx;
   line-height:90rpx;
   box-sizing:border-box;
@@ -132,7 +127,7 @@
   overflow:visible;
 }
 .btn-next{
-  margin:180rpx 100rpx 0rpx 100rpx;
+  margin-top:180rpx;
   color:#fff;
   background-color:#0092ff;
 }

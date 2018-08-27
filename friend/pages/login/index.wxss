@@ -1,1 +1,8 @@
 @import "../register/index.wxss";
+.txt-area{
+  display:flex;
+  justify-content:space-between;
+  color: #cccccc;
+  
+}
+.btn-area{margin-top: 70rpx;}

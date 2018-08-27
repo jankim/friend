@@ -78,15 +78,11 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       }
     }
@@ -166,7 +162,7 @@ Page({
                   showCancel: false,
                   content: rel.data.msg,
                   success: (res) => {
-                    this.redirectToLogin();
+                    app.jamasTool.goToLogin()
                   }
                 })
               } else {
@@ -220,7 +216,7 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
@@ -258,13 +254,9 @@ Page({
         console.log(rel)
         if (rel.data.code == "1") {
           if (rel.data.data.result) {
-            wx.showToast({
-              title: '举报成功',
-            })
+            app.jamasTool.showToast('举报成功');
           }else{
-            wx.showToast({
-              title: '服务器繁忙，请稍候再试',
-            })
+            app.jamasTool.showToast('服务器繁忙，请稍候再试');
           }
         } else if (rel.data.code == "401") {
           wx.showModal({
@@ -272,15 +264,11 @@ Page({
             showCancel: false,
             content: rel.data.msg,
             success: (res) => {
-              this.redirectToLogin();
+              app.jamasTool.goToLogin()
             }
           })
         } else {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: rel.data.msg
-          })
+          app.jamasTool.showToast('服务器繁忙，请稍候再试');
         }
       }
     }
@@ -293,25 +281,20 @@ Page({
     }
     return {
       title: app.globalData.shareProfile,
-      path: 'pages/ListView/ListView',
+      path: app.globalData.sharePath,
       imageUrl: app.globalData.shareimageUrl,
       success: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发成功',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发成功',
+        // })
       },
       fail: function (res) {
-        wx.showToast({
-          icon: 'none',
-          title: '转发失败',
-        })
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '转发失败',
+        // })
       }
     }
-  },
-  redirectToLogin: function () {
-    wx.redirectTo({
-      url: '../login/index'
-    })
   },
 })
